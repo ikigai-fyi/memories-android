@@ -22,10 +22,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import fyi.ikigai.memories.R
+import fyi.ikigai.memories.auth.AuthViewModel
 import fyi.ikigai.memories.ui.theme.StravaBackground
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(auth : AuthViewModel) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.SpaceAround,
@@ -50,7 +51,7 @@ fun LoginScreen() {
             )
         }
         Button(
-            onClick = {}, colors = ButtonDefaults.buttonColors(
+            onClick = { auth.login() }, colors = ButtonDefaults.buttonColors(
                 containerColor = StravaBackground,
                 contentColor = Color.White
             )
@@ -64,5 +65,7 @@ fun LoginScreen() {
 @Preview
 @Composable
 fun LoginScreenPreview() {
-    LoginScreen()
+    val auth = AuthViewModel()
+
+    LoginScreen(auth)
 }
