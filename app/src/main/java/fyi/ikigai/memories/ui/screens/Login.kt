@@ -1,8 +1,10 @@
 package fyi.ikigai.memories.ui.screens
 
+import android.app.Activity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -26,9 +28,12 @@ import fyi.ikigai.memories.auth.AuthViewModel
 import fyi.ikigai.memories.ui.theme.StravaBackground
 
 @Composable
-fun LoginScreen(auth : AuthViewModel) {
+fun LoginScreen(
+    modifier: Modifier = Modifier,
+    onLoginWithStravaClicked: () -> Unit = {}
+) {
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = modifier,
         verticalArrangement = Arrangement.SpaceAround,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
@@ -40,10 +45,10 @@ fun LoginScreen(auth : AuthViewModel) {
                     .clip(RoundedCornerShape(40.dp))
                     .size(200.dp),
             )
-            Text(text = "Memories", fontSize = 30.sp, fontWeight = FontWeight.Bold)
+            Text(text = "Memories", fontSize = 30.sp, fontWeight = FontWeight.Black)
             Text(
                 text = "Strava",
-                fontSize = 20.sp,
+                fontSize = 25.sp,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier
                     .rotate(180F)
@@ -51,9 +56,8 @@ fun LoginScreen(auth : AuthViewModel) {
             )
         }
         Button(
-            onClick = { auth.login() }, colors = ButtonDefaults.buttonColors(
-                containerColor = StravaBackground,
-                contentColor = Color.White
+            onClick = { onLoginWithStravaClicked() }, colors = ButtonDefaults.buttonColors(
+                containerColor = StravaBackground, contentColor = Color.White
             )
 
         ) {
@@ -67,5 +71,5 @@ fun LoginScreen(auth : AuthViewModel) {
 fun LoginScreenPreview() {
     val auth = AuthViewModel()
 
-    LoginScreen(auth)
+    LoginScreen()
 }

@@ -5,13 +5,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 
-class AuthViewModel: ViewModel() {
-    var appJustLaunched by mutableStateOf(true)
+class AuthViewModel() : ViewModel() {
     var userIsAuthenticated by mutableStateOf(false)
 
     fun login() {
         userIsAuthenticated = true
-        appJustLaunched = false
     }
 
     fun logout() {

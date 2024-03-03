@@ -3,21 +3,18 @@ package fyi.ikigai.memories
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import fyi.ikigai.memories.auth.AuthViewModel
-import fyi.ikigai.memories.ui.screens.HomeScreen
-import fyi.ikigai.memories.ui.screens.LoginScreen
+import androidx.activity.enableEdgeToEdge
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        val intentUri = intent.data.also { intent.data = null }
+
+        enableEdgeToEdge()
+
         super.onCreate(savedInstanceState)
-        val auth = AuthViewModel()
 
         setContent {
-            if (auth.userIsAuthenticated) {
-                HomeScreen()
-            } else {
-                LoginScreen(auth)
-            }
+            MemoriesApp(intentUri)
         }
     }
 }
